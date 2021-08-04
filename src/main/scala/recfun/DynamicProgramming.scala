@@ -1,8 +1,8 @@
 package recfun
 
-object test {
+object DynamicProgramming {
   
-//  三角形初始化
+//  1、数字三角形
   val D = Array[Array[Int]](Array(7),Array(3,8),Array(8,1,0),Array(2,7,4,4),Array(4,5,2,6,5))
   val N = 4
   val mSum = Array.ofDim[Int](N+1,N+1)
@@ -23,7 +23,7 @@ object test {
     mSum(r)(l)
   }
 
-//  正则
+//  动态规划
   def maxSum_3():Int = {
     val mSum = Array.ofDim[Int](N+1,N+1)
     for (i <- 0 to N) mSum(N)(i) = D(N)(i)
@@ -42,7 +42,7 @@ object test {
     mSum(0)
   }
   
-//  最长公共子串
+//  2、最长公共子串，输出两个字符串顺序不变的情况下最长的相同子字符串。
   def maxCommonStr(s1:String, s2:String):Int = {
     val l1 = s1.length
     val l2 = s2.length
@@ -58,12 +58,14 @@ object test {
       for (j <- 1 to l2)
         if sa1(i-1) == sa2(j-1) then mCom(i)(j) = mCom(i-1)(j-1) + 1
 //          mistake
-//      if sa1(i-1) == sa2(j-1) then mCom(i)(j) = math.max(mCom(i-1)(j), mCom(i)(j-1)) + 1 
+//     if sa1(i-1) == sa2(j-1) then mCom(i)(j) = math.max(mCom(i-1)(j), mCom(i)(j-1)) + 1 
+//     按理说，如果发现两个字母相同，两个集合都去掉相同的字母，然后index两边同时加一；我写的是，如果发现这两个字母相同，其中一个集合去掉当前字母并且index加一，另一个不变。
         else mCom(i)(j) = math.max(mCom(i-1)(j), mCom(i)(j-1))
     mCom(l1)(l2)
   }
   
-//  help jimmy
+//  3、help jimmy
+//  没有现成的题目，太难了=，=
   def helpJimmy(t:Array[Array[Int]]):Int ={
     val jimmy = t.head
     val maxHigh = jimmy(3)
@@ -78,7 +80,7 @@ object test {
   def main(args: Array[String]): Unit = {
 //    println(maxSum_2(0,0))
 //    println(maxSum_4())
-    println(maxCommonStr("abcdef", "aaaaef"))
-    println(helpJimmy(Array[Array[Int]](Array(2, 6, 6, 5),Array(2, 6, 10, 5),Array(3,8,6),Array(1,6,4))))
+//     println(maxCommonStr("abcdef", "aaaaef"))
+//     println(helpJimmy(Array[Array[Int]](Array(2, 6, 6, 5),Array(2, 6, 10, 5),Array(3,8,6),Array(1,6,4))))
   }
 }
