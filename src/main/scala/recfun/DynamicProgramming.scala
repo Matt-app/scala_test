@@ -1,5 +1,6 @@
 package recfun
 
+
 object DynamicProgramming {
   
 //  1、数字三角形
@@ -67,20 +68,49 @@ object DynamicProgramming {
 //  3、help jimmy
 //  没有现成的题目，太难了=，=
   def helpJimmy(t:Array[Array[Int]]):Int ={
+//  先排序
+//  下面有没有板
     val jimmy = t.head
     val maxHigh = jimmy(3)
     val numPlatform = jimmy(0)
-    val minDistance = Array.ofDim[Int](numPlatform,numPlatform)
-    minDistance(0) = Array(jimmy(2)+math.abs(t(1)(0)-jimmy(1)),jimmy(2)+math.abs(t(1)(1)-jimmy(1)))
-    
-
+    val platforms = t.tail.sortBy(-_(2))
+    var leftMinTime = Array[Int](numPlatform)
+    var rightMinTime = Array[Int](numPlatform)
     1
   }
   
+//  4.最佳加法表达式，子问题是前l-1个数字添加m-1个加号的最小值。未做空间优化
+  def bestAdd(s:String, m:Int) ={
+    val l = s.length
+    var minSum = Array.ofDim[Int](m+1, l)
+    for (i <- 0 to l-1) {
+      minSum(0)(i) = s.substring(0, i+1).toInt
+    }
+    if m > 1 then
+      for (i <- 1 to m)
+        for (j <- 0 to i-1)
+          minSum(i)(j) = Int.MaxValue - s.toInt
+
+    for (i <- 1 to m)
+      for (j <- i to l-1)
+        var tmpSum = List.empty[Int]
+        for (k <- 0 to j-1)
+        tmpSum = tmpSum.appended(minSum(i-1)(k) + s.substring(k+1, j+1).toInt)
+        minSum(i)(j) = tmpSum.min
+    minSum(m)(l-1)
+  }
+
+//滑雪问题，脑子：我懂了，先看别的，这个留着下次写
+  def skiing() = {
+    ???
+  }
+
   def main(args: Array[String]): Unit = {
 //    println(maxSum_2(0,0))
 //    println(maxSum_4())
 //     println(maxCommonStr("abcdef", "aaaaef"))
-//     println(helpJimmy(Array[Array[Int]](Array(2, 6, 6, 5),Array(2, 6, 10, 5),Array(3,8,6),Array(1,6,4))))
+//     println(helpJimmy(Array[Array[Int]](Array(3,8,17,20),Array(0,10,8),Array(0,10,13),Array(4,14,3))))
+    println(bestAdd("54321", 2))
+
   }
 }
