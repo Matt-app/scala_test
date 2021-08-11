@@ -108,9 +108,8 @@ object DynamicProgramming {
   def main(args: Array[String]): Unit = {
 //    println(maxSum_2(0,0))
 //    println(maxSum_4())
-//     println(maxCommonStr("abcdef", "aaaaef"))
+//    println(maxCommonStr("ilovechina", "ilikechinesepeople"))
 //     println(helpJimmy(Array[Array[Int]](Array(3,8,17,20),Array(0,10,8),Array(0,10,13),Array(4,14,3))))
     println(bestAdd("54321", 2))
-
   }
 }

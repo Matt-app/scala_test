@@ -1,5 +1,8 @@
 package recfun
 
+import math.max
+import math._
+
 object scala_class2 {
 //  higher-order functions 接收functions为参数
   def sumInts(f: Int => Int, a: Int, b: Int): Int =
