@@ -53,3 +53,34 @@ val t = Rational(5)
 x.add(y).mul(z)
 x.neg()
 x.sub(y)
+
+// List Class
+def pack[T](xs: List[T]): List[List[T]] = xs match {
+  case Nil => Nil
+  case y :: ys =>
+    val (more, res) = ys.span(x => x == y)
+    (y :: more) :: pack(res)
+}
+
+val p1 = List(1,1,1,2,2,3)
+pack(p1)
+
+def encode[T](xs: List[T]): List[(T, Int)] =
+  pack(xs).map(x => (x.head, x.size))
+//  xs match {
+//  case Nil => Nil
+//  case y :: ys =>
+//    val (more, res) = ys.span(x => x == y)
+//    (y, more.size+1) :: encode(res)
+//}
+
+
+encode(p1)
+
+p1 ++ List(6, 5)
+p1 :: List(6, 5)
+p1 ::: List(6, 5)
+p1 :+ List(6,5)
+p1 +: List(6,5)
+p1 :: List(6, 5) :: Nil
+p1 ::: List(6, 5) ::: Nil
